@@ -22,7 +22,7 @@ public class EmployeePersonalDetailsService {
         this.employeePersonalDetailsRepository = employeePersonalDetailsRepository;
     }
 
-    public EmployeePersonalDetails createEmployee(EmployeePersonalDetails personalDetails){
+    public EmployeePersonalDetails createEmployee(EmployeePersonalDetails personalDetails) {
         EmployeePersonalDetails employeePersonalDetails = new EmployeePersonalDetails();
         employeePersonalDetails.setFirstName(personalDetails.getFirstName());
         employeePersonalDetails.setMiddleName(personalDetails.getMiddleName());
@@ -39,7 +39,7 @@ public class EmployeePersonalDetailsService {
         return employeePersonalDetails;
     }
 
-    public EmployeePersonalDetails updateEmployee(EmployeePersonalDetails details, String empId){
+    public EmployeePersonalDetails updateEmployee(EmployeePersonalDetails details, String empId) {
         EmployeePersonalDetails employeePersonalDetails = employeePersonalDetailsRepository.findByEmpId(empId);
 
         if (details.getFirstName() != null && !details.getFirstName().isEmpty()) {
@@ -66,8 +66,7 @@ public class EmployeePersonalDetailsService {
         if (details.getDateOfBirth() != null && (details.getDateOfBirth() instanceof Date)) {
             employeePersonalDetails.setDateOfBirth(details.getDateOfBirth());
         }
-        updateEmployeeContactDetails(details.getEmployeeContactDetails(),employeePersonalDetails);
-        employeePersonalDetails.setEmployeeContactDetails(details.getEmployeeContactDetails());
+        updateEmployeeContactDetails(details.getEmployeeContactDetails(), employeePersonalDetails);
         employeePersonalDetails.setEmployeeQualificationDetails(details.getEmployeeQualificationDetails());
         employeePersonalDetails.setEmployeeJobDetails(details.getEmployeeJobDetails());
         employeePersonalDetailsRepository.save(employeePersonalDetails);
@@ -75,38 +74,67 @@ public class EmployeePersonalDetailsService {
     }
 
     private void updateEmployeeContactDetails(EmployeeContactDetails employeeContactDetails, EmployeePersonalDetails employeePersonalDetails) {
-        employeePersonalDetails.getEmployeeContactDetails().setPinCode(employeeContactDetails.getPinCode());
+        if (employeeContactDetails.getPinCode() != null && !employeeContactDetails.getPinCode().isEmpty()) {
+            employeePersonalDetails.getEmployeeContactDetails().setPinCode(employeeContactDetails.getPinCode());
+        }
+        if (employeeContactDetails.getStreet() != null && !employeeContactDetails.getStreet().isEmpty()) {
+            employeePersonalDetails.getEmployeeContactDetails().setStreet(employeeContactDetails.getStreet());
+        }
+        if (employeeContactDetails.getCity() != null && !employeeContactDetails.getCity().isEmpty()) {
+            employeePersonalDetails.getEmployeeContactDetails().setCity(employeeContactDetails.getCity());
+        }
+        if (employeeContactDetails.getState() != null && !employeeContactDetails.getState().isEmpty()) {
+            employeePersonalDetails.getEmployeeContactDetails().setState(employeeContactDetails.getState());
+        }
+        if (employeeContactDetails.getCountry() != null && !employeeContactDetails.getCountry().isEmpty()) {
+            employeePersonalDetails.getEmployeeContactDetails().setCountry(employeeContactDetails.getCountry());
+        }
+        if (employeeContactDetails.getEmail() != null && !employeeContactDetails.getEmail().isEmpty()) {
+            employeePersonalDetails.getEmployeeContactDetails().setEmail(employeeContactDetails.getEmail());
+        }
+        if (employeeContactDetails.getMobileNumber() != null && employeeContactDetails.getMobileNumber() instanceof Long) {
+            employeePersonalDetails.getEmployeeContactDetails().setMobileNumber(employeeContactDetails.getMobileNumber());
+        }
+        if (employeeContactDetails.getEmergencyMobileNumber() != null && employeeContactDetails.getEmergencyMobileNumber() instanceof Long) {
+            employeePersonalDetails.getEmployeeContactDetails().setEmergencyMobileNumber(employeeContactDetails.getEmergencyMobileNumber());
+        }
     }
 
-    public Map<String, Object> getAllEmployee(){
+    private void updateEmployeeQualificationDetails(EmployeeQualificationDetails employeeQualificationDetails, EmployeePersonalDetails employeePersonalDetails) {
+    }
+
+    private void updateEmployeeJobDetails(EmployeeJobDetails employeeJobDetails, EmployeePersonalDetails employeePersonalDetails) {
+    }
+
+    public Map<String, Object> getAllEmployee() {
         Map<String, Object> personalDetailsLongMap = new HashMap<>();
         personalDetailsLongMap.put("Count", employeePersonalDetailsRepository.count());
         personalDetailsLongMap.put("Data", employeePersonalDetailsRepository.findAll());
         return personalDetailsLongMap;
     }
 
-    public Map<String, Object> getAllPermanentEmployee(){
+    public Map<String, Object> getAllPermanentEmployee() {
         Map<String, Object> map = new HashMap<>();
         map.put("Count", employeePersonalDetailsRepository.countAllByEmployeeJobDetails_JobStatus(JobStatus.PERMANENT));
         map.put("Data", employeePersonalDetailsRepository.findAllByEmployeeJobDetails_JobStatus(JobStatus.PERMANENT));
         return map;
     }
 
-    public Map<String, Object> getAllProbationEmployee(){
+    public Map<String, Object> getAllProbationEmployee() {
         Map<String, Object> objectMap = new HashMap<>();
         objectMap.put("Count", employeePersonalDetailsRepository.countAllByEmployeeJobDetails_JobStatus(JobStatus.PROBATION));
         objectMap.put("Data", employeePersonalDetailsRepository.findAllByEmployeeJobDetails_JobStatus(JobStatus.PROBATION));
         return objectMap;
     }
 
-    public Map<String, Object> getAllFormerEmployee(){
+    public Map<String, Object> getAllFormerEmployee() {
         Map<String, Object> objectMapFormer = new HashMap<>();
         objectMapFormer.put("Count", employeePersonalDetailsRepository.countAllByEmployeeJobDetails_JobStatus(JobStatus.FORMER));
         objectMapFormer.put("Data", employeePersonalDetailsRepository.findAllByEmployeeJobDetails_JobStatus(JobStatus.FORMER));
         return objectMapFormer;
     }
 
-    public Map<String, Object> getAllInternEmployee(){
+    public Map<String, Object> getAllInternEmployee() {
         Map<String, Object> objectMapFormer = new HashMap<>();
         objectMapFormer.put("Count", employeePersonalDetailsRepository.countAllByEmployeeJobDetails_JobStatus(JobStatus.INTERNSHIP));
         objectMapFormer.put("Data", employeePersonalDetailsRepository.findAllByEmployeeJobDetails_JobStatus(JobStatus.INTERNSHIP));
@@ -114,7 +142,7 @@ public class EmployeePersonalDetailsService {
     }
 
 
-    public EmployeePersonalDetails getEmployeeByEmpId(String empId){
+    public EmployeePersonalDetails getEmployeeByEmpId(String empId) {
         return employeePersonalDetailsRepository.findByEmpId(empId);
     }
 }
