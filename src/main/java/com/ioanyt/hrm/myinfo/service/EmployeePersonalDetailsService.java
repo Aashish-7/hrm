@@ -2,13 +2,17 @@ package com.ioanyt.hrm.myinfo.service;
 
 import com.ioanyt.hrm.myinfo.dao.EmployeePersonalDetailsRepository;
 import com.ioanyt.hrm.myinfo.enums.JobStatus;
-import com.ioanyt.hrm.myinfo.modal.*;
-import lombok.Data;
+import com.ioanyt.hrm.myinfo.modal.EmployeeContactDetails;
+import com.ioanyt.hrm.myinfo.modal.EmployeeJobDetails;
+import com.ioanyt.hrm.myinfo.modal.EmployeePersonalDetails;
+import com.ioanyt.hrm.myinfo.modal.EmployeeQualificationDetails;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -105,6 +109,12 @@ public class EmployeePersonalDetailsService {
 
     private void updateEmployeeJobDetails(EmployeeJobDetails employeeJobDetails, EmployeePersonalDetails employeePersonalDetails) {
     }
+
+
+    public List<EmployeePersonalDetails> findAll(){
+       return employeePersonalDetailsRepository.findAll();
+    }
+
 
     public Map<String, Object> getAllEmployee() {
         Map<String, Object> personalDetailsLongMap = new HashMap<>();
