@@ -1,11 +1,12 @@
-package com.ioanyt.hrm.time.dto;
+package com.ioanyt.hrm.leave.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 @AllArgsConstructor
-public class AttendanceDto {
+public class LeaveDto {
 }
