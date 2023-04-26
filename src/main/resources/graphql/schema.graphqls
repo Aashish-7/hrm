@@ -67,3 +67,63 @@ enum JobStatus {
     INTERNSHIP,
     FORMER
 }
+
+type Mutation{
+    createEmployee(employeePersonalDetails: EmployeePersonalDetailDto):EmployeePersonalDetails
+}
+
+input EmployeePersonalDetailDto {
+    firstName: String
+    middleName: String
+    lastName: String
+    empId: String
+    nationality: String
+    maritalStatus: String
+    dateOfBirth: String
+    gender: String
+    employeeContactDetails: EmployeeContactDetail
+    employeeQualificationDetails: EmployeeQualificationDetail
+    employeeJobDetails: EmployeeJobDetail
+}
+input EmployeeContactDetail {
+    street: String
+    city: String
+    state: String
+    country: String
+    email: String
+    pinCode: String
+    mobileNumber: Int
+    emergencyMobileNumber: Int
+}
+
+input EmployeeQualificationDetail {
+    skills: [String]
+    languages: [String]
+    employeeWorkExperienceDetails: [EmployeeWorkExperienceDetail]
+    employeeEducationDetails: [EmployeeEducationDetail]
+}
+
+input EmployeeWorkExperienceDetail {
+    companyName: String
+    jobTitle: String
+    from: String
+    to: String
+    comment: String
+}
+
+input EmployeeEducationDetail {
+    educationLevel: String
+    institute: String
+    startDate: String
+    endDate: String
+    specialization: String
+}
+
+input EmployeeJobDetail {
+    joiningDate: String
+    jobTitle: String
+    jobCategory: String
+    jobLocation: String
+    jobStatus: JobStatus
+    designation: String
+}

@@ -1,5 +1,6 @@
 package com.ioanyt.hrm.myinfo.controller;
 
+import com.ioanyt.hrm.myinfo.dto.EmployeePersonalDetailDto;
 import com.ioanyt.hrm.myinfo.modal.EmployeePersonalDetails;
 import com.ioanyt.hrm.myinfo.service.EmployeePersonalDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class EmployeePersonalDetailsController {
     }
 
     @PostMapping("/createEmployee")
-    private EmployeePersonalDetails createEmployee(@RequestBody EmployeePersonalDetails personalDetails){
+    private EmployeePersonalDetails createEmployee(@RequestBody EmployeePersonalDetailDto personalDetails){
        return employeePersonalDetailsService.createEmployee(personalDetails);
     }
 

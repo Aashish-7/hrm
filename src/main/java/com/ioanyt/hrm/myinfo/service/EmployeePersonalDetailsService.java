@@ -1,6 +1,7 @@
 package com.ioanyt.hrm.myinfo.service;
 
 import com.ioanyt.hrm.myinfo.dao.EmployeePersonalDetailsRepository;
+import com.ioanyt.hrm.myinfo.dto.EmployeePersonalDetailDto;
 import com.ioanyt.hrm.myinfo.enums.JobStatus;
 import com.ioanyt.hrm.myinfo.modal.EmployeeContactDetails;
 import com.ioanyt.hrm.myinfo.modal.EmployeeJobDetails;
@@ -26,7 +27,7 @@ public class EmployeePersonalDetailsService {
         this.employeePersonalDetailsRepository = employeePersonalDetailsRepository;
     }
 
-    public EmployeePersonalDetails createEmployee(EmployeePersonalDetails personalDetails) {
+    public EmployeePersonalDetails createEmployee(EmployeePersonalDetailDto personalDetails) {
         EmployeePersonalDetails employeePersonalDetails = new EmployeePersonalDetails();
         employeePersonalDetails.setFirstName(personalDetails.getFirstName());
         employeePersonalDetails.setMiddleName(personalDetails.getMiddleName());
