@@ -1,5 +1,6 @@
 package com.ioanyt.hrm.myinfo.dao;
 
+import com.ioanyt.hrm.leave.modal.Leave;
 import com.ioanyt.hrm.myinfo.enums.JobStatus;
 import com.ioanyt.hrm.myinfo.modal.EmployeePersonalDetails;
 import org.springframework.data.mongodb.repository.MongoRepository;
